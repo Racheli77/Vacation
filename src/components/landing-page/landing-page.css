@@ -1,0 +1,17 @@
+
+
+body {
+    margin: 0;
+    background-color: darkcyan;
+  
+  }
+  .landing-page{
+    background-color: aqua;
+    font-size: x-large;
+    margin: 20px;
+    padding: 20px;
+}
+h1{
+  text-align: center;
+}
+  

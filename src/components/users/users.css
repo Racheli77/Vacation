@@ -1,0 +1,12 @@
+
+.users .u {
+    background-color: darkgoldenrod;
+    font-size: small;
+    border: 1px solid black;
+    margin: 20px;
+    padding: 20px;
+    display: inline-block;
+    width: 150px;
+    height: 200px;
+    background-image: linear-gradient(45deg,  rgb(128, 35, 81), gray);
+}

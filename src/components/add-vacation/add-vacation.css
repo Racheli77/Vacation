@@ -1,0 +1,26 @@
+
+body {
+    margin: 0;
+    background-color: darkcyan;
+  }
+
+  h2{
+    text-align: center;
+  }
+
+  .add-vacation input {
+    width: 300px;
+    height: 30px;
+    font-size: large;
+    border: 1px solid black;
+    margin: 20px;
+    display: inline-block;
+  }
+
+  .add-vacation input[type="file"] {
+    display: none;
+}
+
+img {
+    width: 200px;
+}
