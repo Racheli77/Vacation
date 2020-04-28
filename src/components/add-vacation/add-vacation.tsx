@@ -110,7 +110,6 @@ export class AddVacation extends Component <any , AddVacationState> {
 //===========================================================================================
   private addVacation = async () => {
         const myFormData = new FormData();
-        myFormData.append("ppp", this.state.vacation.description);
         myFormData.append("description", this.state.vacation.description);
         myFormData.append("destination", this.state.vacation.destination); 
         myFormData.append("picFileName", this.state.vacation.picFileName, this.state.vacation.picFileName.name);

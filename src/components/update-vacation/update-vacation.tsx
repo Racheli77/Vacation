@@ -3,12 +3,8 @@ import React, { Component, ChangeEvent } from "react";
 import "./update-vacation.css";
 import axios from 'axios'
 import { VacationModel } from "../../models/vacations";
-
 import { connect } from 'react-redux'
 import { ActionType } from "../../store/actions/actionTypes";
-
-
-// 2013-01-08
 
 interface AddVacationState {
     vacation: VacationModel,
@@ -29,17 +25,12 @@ class UpdateVacation extends Component<any, AddVacationState> {
 
     componentDidMount() {
         this.getVacationById();
-        // this.updateFullVacation();
     }
 
     private async getVacationById() {
         const result = await axios.get(`http://localhost:3000/api/vacations/${this.props.match.params.vacationID}`);
         this.setState({ vacation: result.data })
     }
-    // private async updateFullVacation() {
-    //     const result = await axios.put(`http://localhost:3000/api/vacations/${this.props.match.params.vacationID}`);
-    //     this.setState({ vacation: result.data })
-    // }
 
     private getDateFormat(date: string) {
         let newMonth = '';
@@ -71,14 +62,23 @@ class UpdateVacation extends Component<any, AddVacationState> {
         vacation.picFileName = picFileName;
         this.setState({ vacation });
 
-        // Display image on client: 
+        // Display image on client:
         var reader = new FileReader();
         reader.onload = event => this.setState({ preview: event.target.result.toString() });
         reader.readAsDataURL(picFileName); // Read the image.
     };
 
+
+
     public onUpdateVacation = async () => {
-        await axios.put(`http://localhost:3000/api/vacations/${this.props.match.params.vacationID}`, this.state.vacation);
+        const myFormData = new FormData();
+        myFormData.append("description", this.state.vacation.description);
+        myFormData.append("destination", this.state.vacation.destination); 
+        myFormData.append("picFileName", this.state.vacation.picFileName, this.state.vacation.picFileName.name);
+        myFormData.append("startDate", this.state.vacation.startDate.toString());// Can't send number.
+        myFormData.append("endDate", this.state.vacation.endDate.toString());
+        myFormData.append("price", this.state.vacation.price.toString());
+        await axios.put(`http://localhost:3000/api/vacations/${this.props.match.params.vacationID}`, myFormData);
         this.props.history.push('/vacations');
     }
 
@@ -101,7 +101,9 @@ class UpdateVacation extends Component<any, AddVacationState> {
                     <button type="button" onClick={() => this.fileInput.click()}>Select Product Image</button>
                     <br /><br />
 
-                    <img src={'http://localhost:3000/api/uploads/' + this.state.vacation.picFileName} />
+                    <img src={this.state.preview} />
+                    <br /><br />
+
 
                     {this.state.vacation && this.state.vacation.startDate ?
                         <input type="date" placeholder="Start Date..."
