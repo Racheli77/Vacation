@@ -7,6 +7,7 @@ export class Home extends Component {
             <div className="home">
                 Home page
                 <img src="http://localhost3000/server/images/india.jpg"/>
+                <span> | </span>
 
             </div>
         );
